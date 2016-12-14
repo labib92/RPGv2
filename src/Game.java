@@ -7,22 +7,35 @@ import java.util.Scanner;
 public class Game {
     class Player {
         int health = 100;
-        int attackDamage = 50;
         int numbHealthPotions = 3;
         int healthPotionHealAmount = 30;
         int healthPotionDropChance = 50;
+        Enemy enemy1 = new Enemy();
+
+        public void drinkPotion(){
+            health += healthPotionHealAmount;
+            numbHealthPotions--;
+        }
+        public void setNumbHealthPotions(){
+            numbHealthPotions++;
+        }
+
+        public int damageDealtToPlayer(){
+            int damageTaken = rand.nextInt(enemy1.enemyAttackDamage);
+            health -= damageTaken;
+            return damageTaken;
+
+        }
+
     }
     Player player = new Player();
-
-
-
-
     Random rand = new Random();
     Scanner in = new Scanner(System.in);
 
     boolean running = true;
 
     public void gameSystem() {
+        System.out.println("Welcome to the Dungeon ");
         GAME:
         while (running) {
             System.out.println("-----------------------------------------------");
@@ -49,7 +62,7 @@ public class Game {
                     }
 
                 } else if (input.equals("3")) {
-                    System.out.println("\tYou run away from the " + enemy + "!");
+                    System.out.println("\tYou run away from the " + enemy.name + "!");
                     continue GAME;
 
                 } else {
@@ -59,7 +72,7 @@ public class Game {
 
             }
             if (player.health < 1) {
-                System.out.println("you are Dead.");
+                System.out.println("\t# YOU DIED T_T#");
                 break;
             }
             System.out.println("-----------------------------------------------");
@@ -73,7 +86,7 @@ public class Game {
             gameOption();
 
             String input = in.nextLine();
-            while (!input.equals("1") && input.equals("2")) {
+            while (!input.equals("1") && !input.equals("2")) {
                 System.out.println("Invalid command!");
                 input = in.nextLine();
             }
@@ -86,15 +99,12 @@ public class Game {
             }
 
         }
+        System.out.println("\t#  GAME OVER  #");
     }
 
     private void attack( Enemy enemy) {
-        int damageDealt = rand.nextInt(player.attackDamage);
-        int damageTaken = rand.nextInt(enemy.enemyAttackDamage);
-        enemy.enemyHealth -= damageDealt;
-        player.health -= damageTaken;
-        System.out.println("\t> You strike the " + enemy.name + " for " + damageDealt + " damage.");
-        System.out.println("\t> You recived " + damageTaken + " in retaliation");
+        System.out.println("\t> You strike the " + enemy.name + " for " + enemy.damageDealtToEnemy() + " damage.");
+        System.out.println("\t> You received " + player.damageDealtToPlayer() + " in retaliation");
     }
 
     private void gameOption() {
@@ -105,14 +115,13 @@ public class Game {
     }
 
     private void potionPercentageDropFromEnemy(Enemy enemy) {
-        player.numbHealthPotions++;
+        player.setNumbHealthPotions();
         System.out.println(" # The " + enemy.name + " dropped a health potion! # ");
         System.out.println(" # You now have " + player.numbHealthPotions + " health potion(s). # ");
     }
 
     private void heal() {
-        player.health += player.healthPotionHealAmount;
-        player.numbHealthPotions--;
+        player.drinkPotion();
         System.out.println("\t> You drink a health potion, healing yourself for " + player.healthPotionHealAmount + "."
                 + "\n\t> You now have " + player.health + " HP."
                 + "\n\t> You have " + player.numbHealthPotions + " health potion left.\n");
