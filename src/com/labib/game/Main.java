@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package com.labib.game;
 
 /**
  * Created by labib's pc on 12/13/2016.
