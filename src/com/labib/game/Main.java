@@ -8,6 +8,8 @@ public class Main {
         Game play= new Game();
 
         play.gameSystem();
+        System.out.println("Nice Game");
+        System.out.println("I love RPG games");
 
     }
 }
