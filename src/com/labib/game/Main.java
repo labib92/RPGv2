@@ -8,10 +8,7 @@ public class Main {
         Game play= new Game();
 
         play.gameSystem();
-        System.out.println("Nice Game");
-        System.out.println("I love RPG games");
-        System.out.println("ffffffffffff");
-        System.out.println("sssssssss");
+        System.out.println("Hi this is my branch");
 
     }
 }
