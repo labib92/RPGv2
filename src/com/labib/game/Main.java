@@ -10,6 +10,8 @@ public class Main {
         play.gameSystem();
         System.out.println("Nice Game");
         System.out.println("I love RPG games");
+        System.out.println("ffffffffffff");
+        System.out.println("sssssssss");
 
     }
 }
