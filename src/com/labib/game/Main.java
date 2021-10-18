@@ -9,6 +9,7 @@ public class Main {
 
         play.gameSystem();
         System.out.println("Hi this is my branch");
+        System.out.println("Hi this is my branch");
 
     }
 }
